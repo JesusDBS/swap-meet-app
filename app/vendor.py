@@ -6,9 +6,6 @@ class Vendor():
     """
 
     def __init__(self, inventory=[]):
-        """
-        Documentation here
-        """
 
         #validations
         # assert all(isinstance(item, str) for item in inventory), 'all elements in inventory must be strings'
