@@ -13,6 +13,10 @@ class Vendor():
         self.inventory = inventory
         self._dict_category = dict()
 
+        for item in inventory:
+            self._add_category(item)
+            self._add_condition(item)
+
     def _add_category(self, item):
         """
         Documentation here
@@ -58,7 +62,6 @@ class Vendor():
         """
         Documentation here
         """
-
         #validations
         assert isinstance(category, str), 'category must be a string!'
 
@@ -111,11 +114,33 @@ class Vendor():
             )
 
             for item in self.inventory:
-                product = (item.category,item.condition)
+                product = (
+                    item.category,
+                    item.condition
+                )
                 if product == my_best_product:
                     return item
 
         return None
+
+    def swap_best_by_category(self, other, my_priority, their_priority):
+        """
+        Documentation here
+        """
+        #validations
+        assert isinstance(other, Vendor), 'other must be instance of Vedor!'
+        assert isinstance(my_priority, str), 'my_priority must be a string!'
+        assert isinstance(their_priority, str), 'their_priority must be a string!'
+
+        my_best_product = self.get_best_by_category(their_priority)
+        their_best_product = other.get_best_by_category(my_priority)
+
+        if my_best_product and their_best_product:
+            self.swap_items(other, my_best_product, their_best_product)
+            return True
+        
+        return False
+     
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.inventory})"
