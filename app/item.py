@@ -13,5 +13,8 @@ class Item():
 
         self.category = category
 
+    def __str__(self):
+        return "Hello World!"
+
     def __repr__(self):
         return f"{self.__class__.__name__}({self.category})"

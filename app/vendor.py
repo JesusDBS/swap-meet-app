@@ -46,10 +46,29 @@ class Vendor():
         """
 
         #validations
-        assert isinstance(category, str), 'category must be a string'
+        assert isinstance(category, str), 'category must be a string!'
 
         list_by_category = [item for item in self.inventory if item.category == category]
         return list_by_category
+
+    def swap_items(self, vendor, my_item, their_item):
+        """
+        Documentation here
+        """
+        #validations
+        assert isinstance(vendor, Vendor), 'vendor must be instance of Vedor!'
+        assert isinstance(my_item, Item), 'my_item must be instance of Item!'
+        assert isinstance(their_item, Item), 'their_item must be instance of Item!'
+        
+        if my_item in self.inventory and their_item in vendor.inventory:
+            self.remove(my_item)
+            self.add(their_item)
+
+            vendor.add(my_item)
+            vendor.remove(their_item)
+            return True
+        
+        return False
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.inventory})"
