@@ -70,6 +70,19 @@ class Vendor():
         
         return False
 
+    def swap_first_item(self, vendor):
+        """
+        Documentation here
+        """
+        #validations
+        assert isinstance(vendor, Vendor), 'vendor must be instance of Vedor!'
+
+        if self.inventory and vendor.inventory:
+            self.inventory[0], vendor.inventory[0] = vendor.inventory[0], self.inventory[0]
+            return True
+        
+        return False
+
     def __repr__(self):
         return f"{self.__class__.__name__}({self.inventory})"
 
