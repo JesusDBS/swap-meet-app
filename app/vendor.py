@@ -11,6 +11,20 @@ class Vendor():
         # assert all(isinstance(item, str) for item in inventory), 'all elements in inventory must be strings'
 
         self.inventory = inventory
+        self._dict_category = dict()
+
+    def _add_category(self, item):
+        """
+        Documentation here
+        """
+        if item.category not in self._dict_category.keys() :
+            self._dict_category[item.category] = set()
+
+    def _add_condition(self, item):
+        """
+        Documentation here
+        """
+        self._dict_category[item.category].add(item.condition)
 
     def add(self, item):
         """
@@ -21,6 +35,9 @@ class Vendor():
         # assert isinstance(item, str), 'The new item must be a string'
 
         self.inventory.append(item)
+        self._add_category(item)
+        self._add_condition(item)
+
         return item
 
     def remove(self, item):
@@ -79,6 +96,26 @@ class Vendor():
             return True
         
         return False
+
+    def get_best_by_category(self, category):
+        """
+        Documentation here
+        """
+        #validations
+        assert isinstance(category, str), 'category must be a string!'
+
+        if category in self._dict_category.keys():
+            my_best_product = (
+                category,
+                max(self._dict_category[category])
+            )
+
+            for item in self.inventory:
+                product = (item.category,item.condition)
+                if product == my_best_product:
+                    return item
+
+        return None
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.inventory})"

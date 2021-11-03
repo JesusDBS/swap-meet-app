@@ -17,17 +17,17 @@ class Item():
         """
         Documentation here
         """
-        if self.condition == 0:
+        if self.condition == 5:
             return "new"
-        elif self.condition == 1:
-            return "pretty new"
-        elif self.condition == 2:
-            return "almost new"
-        elif self.condition == 3:
-            return "used"
         elif self.condition == 4:
+            return "pretty new"
+        elif self.condition == 3:
+            return "almost new"
+        elif self.condition == 2:
+            return "used"
+        elif self.condition == 1:
             return "heavily used"
-        elif self.condition == 5:
+        elif self.condition == 0:
             return "I'd don't use it"
 
     def __str__(self):
