@@ -57,6 +57,9 @@ class Vendor():
             return item
 
         return False
+    
+    def remove_by_category(self, category):
+        pass
 
     def get_by_category(self, category):
         """
