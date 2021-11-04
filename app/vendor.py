@@ -61,6 +61,9 @@ class Vendor():
     def remove_by_category(self, category):
         pass
 
+    def remove_by_condition(self, condition):
+        pass
+
     def get_by_category(self, category):
         """
         Documentation here
@@ -70,6 +73,9 @@ class Vendor():
 
         list_by_category = [item for item in self.inventory if item.category == category]
         return list_by_category
+
+    def get_by_condition(self,condition):
+        pass
 
     def swap_items(self, vendor, my_item, their_item):
         """
