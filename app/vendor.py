@@ -59,10 +59,37 @@ class Vendor():
         return False
     
     def remove_by_category(self, category):
-        pass
+        """
+        Documentation here
+        """
+        #validations
+        assert isinstance(category, str), 'category must be a string!'
+
+        if category in self._dict_category.keys():
+            del self._dict_category[category]
+            self.inventory = list(filter(lambda item: item.category != category, self.inventory))
+            return True
+
+        return False
 
     def remove_by_condition(self, condition):
-        pass
+        """
+        Documentation here
+        """
+        #validations
+        assert condition >= 0, 'condition must be greater or equal than zero'
+        assert condition < 6, 'condition must be an integer between zero and five'
+
+        for key, value in self._dict_category.items():
+            if condition not in value:
+                return False
+            else:
+                break
+
+        self.inventory = list(filter(lambda item: item.condition != condition, self.inventory))
+
+        return True
+
 
     def get_by_category(self, category):
         """
@@ -72,10 +99,26 @@ class Vendor():
         assert isinstance(category, str), 'category must be a string!'
 
         list_by_category = [item for item in self.inventory if item.category == category]
-        return list_by_category
+        
+        if list_by_category:
+            return list_by_category
+        
+        return False
 
     def get_by_condition(self,condition):
-        pass
+        """
+        Documentation here
+        """
+        #validations
+        assert condition >= 0, 'condition must be greater or equal than zero'
+        assert condition < 6, 'condition must be an integer between zero and five'
+
+        list_by_condition = [item for item in self.inventory if item.condition == condition]
+
+        if list_by_condition:
+            return list_by_condition
+
+        return False
 
     def swap_items(self, vendor, my_item, their_item):
         """
