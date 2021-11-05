@@ -85,8 +85,10 @@ class Vendor():
                 return False
             else:
                 break
-
+        
         self.inventory = list(filter(lambda item: item.condition != condition, self.inventory))
+        for key in self._dict_category.keys():
+            self._dict_category[key] = set(filter(lambda value: value != condition, self._dict_category[key]))
 
         return True
 
