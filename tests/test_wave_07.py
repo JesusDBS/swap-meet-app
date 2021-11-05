@@ -5,6 +5,7 @@ from app.clothing import Clothing
 from app.decor import Decor
 from app.electronics import Electronics
 
+
 def test_get_by_condition():
     item_a = Clothing(condition=2.0)
     item_b = Decor(condition=2.0)
