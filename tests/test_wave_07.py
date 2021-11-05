@@ -171,6 +171,24 @@ def test_removing_category_with_no_items_in_inventory():
     assert "Electronics" not in tai._dict_category.keys()
 
 
+def test_not_removing_category_with_items_in_inventory():
+    item_a = Clothing(condition=2.0)
+    item_b = Decor(condition=2.0)
+    item_c = Electronics(condition=4.0)
+    item_d = Electronics(condition=4.0)
+
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c, item_d]
+    )
+    
+    tai.remove(item_c)
+
+    assert len(tai.inventory) is 3
+    assert len(tai._dict_category.keys()) is 3
+    assert tai.get_by_category("Electronics") is not False
+    assert "Electronics" in tai._dict_category.keys()
+
+
 def test_removing_condition_with_no_items_in_inventory():
     item_a = Clothing(condition=2.0)
     item_b = Decor(condition=2.0)

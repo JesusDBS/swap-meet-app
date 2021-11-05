@@ -17,6 +17,7 @@ class Vendor():
             self._add_category(item)
             self._add_condition(item)
 
+
     def _add_category(self, item):
         """
         Documentation here
@@ -24,11 +25,13 @@ class Vendor():
         if item.category not in self._dict_category.keys() :
             self._dict_category[item.category] = set()
 
+
     def _add_condition(self, item):
         """
         Documentation here
         """
         self._dict_category[item.category].add(item.condition)
+
 
     def add(self, item):
         """
@@ -44,6 +47,7 @@ class Vendor():
 
         return item
 
+
     def remove(self, item):
         """
         Documentation here
@@ -54,10 +58,19 @@ class Vendor():
 
         if item in self.inventory:
             self.inventory.remove(item)
+
+            if self.get_by_category(item.category):
+                if self.get_by_condition(item.condition):
+                    self._dict_category[item.category].remove(item.condition) 
+                
+                return item
+        
+            del self._dict_category[item.category]
             return item
 
         return False
     
+
     def remove_by_category(self, category):
         """
         Documentation here
@@ -71,6 +84,7 @@ class Vendor():
             return True
 
         return False
+
 
     def remove_by_condition(self, condition):
         """
@@ -100,14 +114,15 @@ class Vendor():
         #validations
         assert isinstance(category, str), 'category must be a string!'
 
-        list_by_category = [item for item in self.inventory if item.category == category]
-        
-        if list_by_category:
-            return list_by_category
-        
-        return False
+        if category not in self._dict_category.keys():
+            return False
 
-    def get_by_condition(self,condition):
+        list_by_category = [item for item in self.inventory if item.category == category]
+
+        return list_by_category
+
+
+    def get_by_condition(self, condition):
         """
         Documentation here
         """
@@ -115,12 +130,16 @@ class Vendor():
         assert condition >= 0, 'condition must be greater or equal than zero'
         assert condition < 6, 'condition must be an integer between zero and five'
 
+        for key, value in self._dict_category.items():
+            if condition not in value:
+                return False
+            else:
+                break
+
         list_by_condition = [item for item in self.inventory if item.condition == condition]
 
-        if list_by_condition:
-            return list_by_condition
+        return list_by_condition
 
-        return False
 
     def swap_items(self, vendor, my_item, their_item):
         """
@@ -141,6 +160,7 @@ class Vendor():
         
         return False
 
+
     def swap_first_item(self, vendor):
         """
         Documentation here
@@ -153,6 +173,7 @@ class Vendor():
             return True
         
         return False
+
 
     def get_best_by_category(self, category):
         """
@@ -176,6 +197,7 @@ class Vendor():
                     return item
 
         return None
+
 
     def swap_best_by_category(self, other, my_priority, their_priority):
         """
