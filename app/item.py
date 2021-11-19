@@ -10,8 +10,37 @@ class Item():
         assert condition >= 0, 'condition must be greater or equal than zero'
         assert condition < 6, 'condition must be an integer between zero and five'
 
-        self.category = category
+        self.__category = category
         self.condition = condition
+
+        self.__category_ = None
+
+        if self.__category:
+            self.__category_ = True
+
+
+    @property
+    def category(self):
+        return self.__category
+
+
+    @category.setter
+    def category(self, value):
+        """
+        Documentation here
+        """
+        assert isinstance(value, str), 'category must be a string'
+
+        if value:
+            if not self.__category_:
+                self.__category = value
+                self.__category_ = True
+
+            else:
+                raise Exception("You can't change the category of the item")          
+        else:
+            raise Exception("Empty Category")
+        
 
     def condition_description(self):
         """
