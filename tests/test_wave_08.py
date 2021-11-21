@@ -30,7 +30,7 @@ def test_get_by_age():
 
     result = tai.get_by_age(2)
 
-    assert len(result) is 2
+    assert len(result) is 3
     assert len(tai.get_by_age(4)) is 1
 
 
@@ -126,7 +126,7 @@ def test_swap_by_old():
         inventory=[item_d, item_e, item_f]
     )
 
-    result = tai.swap_by_age_condition(
+    result = tai.swap_by_old(
         other=jesse,
         my_priority="Clothing",
         their_priority="Decor",
@@ -158,7 +158,7 @@ def test_swap_by_old_no_match_is_false():
         inventory=[item_d, item_e, item_f]
     )
 
-    result = tai.swap_by_age_condition(
+    result = tai.swap_by_old(
         other=jesse,
         my_priority="Clothing",
         their_priority="Decor",
@@ -169,7 +169,6 @@ def test_swap_by_old_no_match_is_false():
     assert result is True
 
     #Falta agregar:
-        # what happens if two or more items have the same age
         # when the item is taken from inventory validate if the condition is taken too
         # when the item is taken from inventory validate if the category is taken too
 

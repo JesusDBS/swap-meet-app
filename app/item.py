@@ -3,15 +3,18 @@ class Item():
     Documentation here
     """
     
-    def __init__(self, category='', condition=0):
+    def __init__(self, category='', condition=0, age=0):
         
         #validations
         assert isinstance(category, str), 'category must be a string'
         assert condition >= 0, 'condition must be greater or equal than zero'
         assert condition < 6, 'condition must be an integer between zero and five'
+        assert isinstance(age,int), 'age must be an integer' 
+        assert age < 10, 'age must be less than 5 years'
 
         self.__category = category
         self.condition = condition
+        self.age = age
 
         self.__category_ = None
 

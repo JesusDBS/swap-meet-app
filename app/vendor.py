@@ -147,8 +147,8 @@ class Vendor():
         """
         #validations
         assert isinstance(vendor, Vendor), 'vendor must be instance of Vedor!'
-        assert isinstance(my_item, Item), 'my_item must be instance of Item!'
-        assert isinstance(their_item, Item), 'their_item must be instance of Item!'
+        # assert isinstance(my_item, Item), 'my_item must be instance of Item!'
+        # assert isinstance(their_item, Item), 'their_item must be instance of Item!'
         
         if my_item in self.inventory and their_item in vendor.inventory:
             self.remove(my_item)
@@ -216,7 +216,63 @@ class Vendor():
             return True
         
         return False
-     
+
+
+    def get_by_age(self, age):
+        """
+        Documentation here
+        """
+        #validations
+        assert isinstance(age, int), 'age must be an integer' 
+        assert age < 10, 'age must be less than 5 years'
+
+        list_by_age = [item for item in self.inventory if item.age == age]
+
+        if list_by_age:
+            return list_by_age
+        
+        return False
+
+
+    def swap_by_age_condition(self, other, my_priority, their_priority, age_condition=''):
+        """
+        Documentation here
+        """
+        #validations
+        assert isinstance(other, Vendor), 'other must be instance of Vedor!'
+        assert isinstance(my_priority, str), 'my_priority must be a string!'
+        assert isinstance(their_priority, str), 'their_priority must be a string!'
+        assert isinstance(age_condition, str), 'age_condition must be a string!'
+        assert age_condition == 'newest' or age_condition == 'oldest', 'age_condition must be newest or oldest'
+
+        if age_condition:
+            my_product_item_list = self.get_by_category(their_priority)
+            my_product_item_list_ages = [item.age for item in my_product_item_list]
+
+            their_product_item_list = other.get_by_category(my_priority)
+            their_product_item_list_ages = [item.age for item in their_product_item_list]
+
+            if age_condition == 'newest':
+                my_product = list(filter(lambda item: item.age == min(my_product_item_list_ages), my_product_item_list))
+                their_product = list(filter(lambda item: item.age == min(their_product_item_list_ages), their_product_item_list))
+
+                self.swap_items(other, my_product[0], their_product[0])
+
+                return True
+            
+            my_product = list(filter(lambda item: item.age == max(my_product_item_list_ages), my_product_item_list))
+            their_product = list(filter(lambda item: item.age == max(their_product_item_list_ages), their_product_item_list))
+
+            self.swap_items(other, my_product[0], their_product[0])
+
+            return True
+
+        return False
+    
+
+    def swap_by_old(self, other, my_priority, their_priority, my_aging_priority, their_aging_priority):
+        pass
+
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.inventory})"

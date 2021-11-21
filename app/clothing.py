@@ -5,8 +5,8 @@ class Clothing(Item):
     Documentation here
     """
     
-    def __init__(self, category="Clothing", condition=0):
-        super().__init__(category=category, condition=condition)
+    def __init__(self, category="Clothing", condition=0, age=0):
+        super().__init__(category=category, condition=condition, age=age)
 
         self.__category = category
 
