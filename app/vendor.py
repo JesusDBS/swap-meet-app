@@ -270,9 +270,6 @@ class Vendor():
         return False
     
 
-    def swap_by_old(self, other, my_priority, their_priority, my_aging_priority, their_aging_priority):
-        pass
-
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.inventory})"

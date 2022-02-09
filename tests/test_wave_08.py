@@ -168,8 +168,5 @@ def test_swap_by_old_no_match_is_false():
 
     assert result is True
 
-    #Falta agregar:
-        # when the item is taken from inventory validate if the condition is taken too
-        # when the item is taken from inventory validate if the category is taken too
-
+  
 
